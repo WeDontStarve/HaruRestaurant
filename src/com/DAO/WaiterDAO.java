@@ -1,4 +1,4 @@
-// default package
+package com.DAO;
 
 import com.DAO.BaseHibernateDAO;
 import java.util.List;
