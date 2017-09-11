@@ -17,11 +17,21 @@ public class Waiter  implements java.io.Serializable {
      private String waiterPhone;
      private Float waiterSalary;
      private Float waiterBonus;
-
+     private Integer adminId;
 
     // Constructors
 
-    /** default constructor */
+    public Integer getAdminId() {
+		return adminId;
+	}
+
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
+
+
+	/** default constructor */
     public Waiter() {
     }
 

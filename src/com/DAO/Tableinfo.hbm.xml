@@ -16,5 +16,8 @@
         <property name="tableStatus" type="java.lang.Integer">
             <column name="tableStatus" not-null="true" />
         </property>
+         <property name="adminId" type="java.lang.Integer">
+         	<column name="adminId" length="11" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

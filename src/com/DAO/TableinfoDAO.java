@@ -1,6 +1,7 @@
 package com.DAO;
 
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -24,7 +25,8 @@ public class TableinfoDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String TABLE_SEAT = "tableSeat";
 	public static final String TABLE_STATUS = "tableStatus";
-
+	public static final String ADMIN_ID="adminId";
+	
 	public void save(Tableinfo transientInstance) {
 		log.debug("saving Tableinfo instance");
 		try {
@@ -96,6 +98,10 @@ public class TableinfoDAO extends BaseHibernateDAO {
 		return findByProperty(TABLE_STATUS, tableStatus);
 	}
 
+	public List findByAdminId(Object adminId){
+		return findByProperty(ADMIN_ID,adminId);
+	}
+	
 	public List findAll() {
 		log.debug("finding all Tableinfo instances");
 		try {
@@ -138,6 +144,18 @@ public class TableinfoDAO extends BaseHibernateDAO {
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			throw re;
+		}
+	}
+	
+	public List findAllId(){
+		log.debug("find all ID from tableInfo");
+		try{
+			String hql="select tableId from Tableinfo";
+			Query queryObject=getSession().createQuery(hql);
+			return queryObject.list();
+		}catch(RuntimeException re){
+			log.error("find id failed",re);
 			throw re;
 		}
 	}

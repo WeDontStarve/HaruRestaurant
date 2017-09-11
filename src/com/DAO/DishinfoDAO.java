@@ -1,6 +1,7 @@
 package com.DAO;
 
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -27,7 +28,8 @@ public class DishinfoDAO extends BaseHibernateDAO {
 	public static final String DISH_IMG = "dishImg";
 	public static final String DISH_PRICE = "dishPrice";
 	public static final String RECOMMEND = "recommend";
-
+	public static final String ADMIN_ID="adminId";
+	
 	public void save(Dishinfo transientInstance) {
 		log.debug("saving Dishinfo instance");
 		try {
@@ -110,6 +112,10 @@ public class DishinfoDAO extends BaseHibernateDAO {
 	public List findByRecommend(Object recommend) {
 		return findByProperty(RECOMMEND, recommend);
 	}
+	
+	public List findByAdminId(Object adminId){
+		return findByProperty(ADMIN_ID,adminId);
+	}
 
 	public List findAll() {
 		log.debug("finding all Dishinfo instances");
@@ -153,6 +159,18 @@ public class DishinfoDAO extends BaseHibernateDAO {
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			throw re;
+		}
+	}
+	
+	public List findAllId(){
+		log.debug("find all ID from dishInfo");
+		try{
+			String hql="select dishId from Dishinfo";
+			Query queryObject=getSession().createQuery(hql);
+			return queryObject.list();
+		}catch(RuntimeException re){
+			log.error("find id failed",re);
 			throw re;
 		}
 	}

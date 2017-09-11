@@ -22,5 +22,8 @@
         <property name="vipphone" type="java.lang.String">
             <column name="VIPPhone" length="30" not-null="true" />
         </property>
+        <property name="adminId" type="java.lang.Integer">
+        	<column name="adminId" length="11" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

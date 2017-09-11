@@ -14,8 +14,17 @@ public class Dishinfo implements java.io.Serializable {
 	private String dishImg;
 	private Float dishPrice;
 	private Integer recommend;
-
+	private Integer adminId;
+	
 	// Constructors
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 
 	/** default constructor */
 	public Dishinfo() {

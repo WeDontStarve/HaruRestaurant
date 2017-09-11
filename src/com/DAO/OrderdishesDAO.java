@@ -1,6 +1,7 @@
 package com.DAO;
 
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -23,7 +24,7 @@ public class OrderdishesDAO extends BaseHibernateDAO {
 			.getLogger(OrderdishesDAO.class);
 	// property constants
 	public static final String NUM = "num";
-
+	public static final String DISH_NAME = "dishName";
 	public void save(Orderdishes transientInstance) {
 		log.debug("saving Orderdishes instance");
 		try {
@@ -91,6 +92,10 @@ public class OrderdishesDAO extends BaseHibernateDAO {
 		return findByProperty(NUM, num);
 	}
 
+	public List findByDishName(Object dishName) {
+		return findByProperty(DISH_NAME, dishName);
+	}
+	
 	public List findAll() {
 		log.debug("finding all Orderdishes instances");
 		try {

@@ -1,6 +1,7 @@
 package com.DAO;
 
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -28,6 +29,7 @@ public class CheifinfoDAO extends BaseHibernateDAO {
 	public static final String CHEIF_PHONE = "cheifPhone";
 	public static final String CHEIF_SALARY = "cheifSalary";
 	public static final String CHEIF_BONUS = "cheifBonus";
+	public static final String ADMIN_ID="adminId";
 
 	public void save(Cheifinfo transientInstance) {
 		log.debug("saving Cheifinfo instance");
@@ -116,6 +118,10 @@ public class CheifinfoDAO extends BaseHibernateDAO {
 		return findByProperty(CHEIF_BONUS, cheifBonus);
 	}
 
+	public List findByAdminId(Object adminId){
+		return findByProperty(ADMIN_ID,adminId);
+	}
+	
 	public List findAll() {
 		log.debug("finding all Cheifinfo instances");
 		try {
@@ -158,6 +164,18 @@ public class CheifinfoDAO extends BaseHibernateDAO {
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			throw re;
+		}
+	}
+	
+	public List findAllId(){
+		log.debug("find all ID from cheifInfo");
+		try{
+			String hql="select tableId from Chiefinfo";
+			Query queryObject=getSession().createQuery(hql);
+			return queryObject.list();
+		}catch(RuntimeException re){
+			log.error("find id failed",re);
 			throw re;
 		}
 	}

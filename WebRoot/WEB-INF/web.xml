@@ -9,4 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+    <servlet>
+        <servlet-name>TableJSONServlet</servlet-name>
+        <servlet-class>com.Servlet.TableJSONServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>TableJSONServlet</servlet-name>
+    <url-pattern>/TableJSONServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

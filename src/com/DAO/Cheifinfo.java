@@ -15,8 +15,17 @@ public class Cheifinfo implements java.io.Serializable {
 	private String cheifPhone;
 	private Float cheifSalary;
 	private Float cheifBonus;
+	private Integer adminId;
 
 	// Constructors
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 
 	/** default constructor */
 	public Cheifinfo() {

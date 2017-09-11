@@ -13,8 +13,17 @@ public class Vipinfo implements java.io.Serializable {
 	private String vippassword;
 	private String vipfaceing;
 	private String vipphone;
-
+	private Integer adminId;
+	
 	// Constructors
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 
 	/** default constructor */
 	public Vipinfo() {
