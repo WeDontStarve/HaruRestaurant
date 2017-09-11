@@ -11,8 +11,16 @@ public class Tableinfo implements java.io.Serializable {
 	private Integer tableId;
 	private Integer tableSeat;
 	private Integer tableStatus;
-
+	private Integer adminId;
 	// Constructors
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 
 	/** default constructor */
 	public Tableinfo() {

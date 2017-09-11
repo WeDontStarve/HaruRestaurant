@@ -27,5 +27,8 @@
                 <comment>菜品是否推荐</comment>
             </column>
         </property>
+        <property name="adminId" type="java.lang.Integer">
+         	<column name="adminId" length="11" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

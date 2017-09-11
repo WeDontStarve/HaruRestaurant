@@ -1,7 +1,9 @@
 package com.DAO;
 
 import com.DAO.BaseHibernateDAO;
+
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -25,7 +27,7 @@ public class WaiterDAO extends BaseHibernateDAO  {
 	public static final String WAITER_PHONE = "waiterPhone";
 	public static final String WAITER_SALARY = "waiterSalary";
 	public static final String WAITER_BONUS = "waiterBonus";
-
+	public static final String ADMIN_ID="adminId";
 
 
     
@@ -130,7 +132,10 @@ public class WaiterDAO extends BaseHibernateDAO  {
 		);
 	}
 	
-
+	public List findByAdminId(Object adminId){
+		return findByProperty(ADMIN_ID,adminId);
+	}
+	
 	public List findAll() {
 		log.debug("finding all Waiter instances");
 		try {
