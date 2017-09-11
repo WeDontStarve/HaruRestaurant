@@ -27,7 +27,7 @@ public class VipinfoDAO extends BaseHibernateDAO {
 	public static final String VIPFACEING = "vipfaceing";
 	public static final String VIPPHONE = "vipphone";
 	public static final String ADMIN_ID="adminId";
-	
+
 	public void save(Vipinfo transientInstance) {
 		log.debug("saving Vipinfo instance");
 		try {
@@ -110,6 +110,7 @@ public class VipinfoDAO extends BaseHibernateDAO {
 	public List findByAdminId(Object adminId){
 		return findByProperty(ADMIN_ID,adminId);
 	}
+
 	public List findAll() {
 		log.debug("finding all Vipinfo instances");
 		try {

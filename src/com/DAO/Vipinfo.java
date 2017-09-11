@@ -14,6 +14,7 @@ public class Vipinfo implements java.io.Serializable {
 	private String vipfaceing;
 	private String vipphone;
 	private Integer adminId;
+
 	// Constructors
 
 	public Integer getAdminId() {
@@ -23,6 +24,7 @@ public class Vipinfo implements java.io.Serializable {
 	public void setAdminId(Integer adminId) {
 		this.adminId = adminId;
 	}
+
 	/** default constructor */
 	public Vipinfo() {
 	}

@@ -18,6 +18,7 @@ public class Waiter  implements java.io.Serializable {
      private Float waiterSalary;
      private Float waiterBonus;
      private Integer adminId;
+
  	// Constructors
 
  	public Integer getAdminId() {
@@ -28,7 +29,7 @@ public class Waiter  implements java.io.Serializable {
  		this.adminId = adminId;
  	}
 
-    /** default constructor */
+	/** default constructor */
     public Waiter() {
     }
 

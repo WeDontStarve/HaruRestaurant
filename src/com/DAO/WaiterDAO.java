@@ -28,8 +28,6 @@ public class WaiterDAO extends BaseHibernateDAO  {
 	public static final String WAITER_SALARY = "waiterSalary";
 	public static final String WAITER_BONUS = "waiterBonus";
 	public static final String ADMIN_ID="adminId";
-
-
     
     public void save(Waiter transientInstance) {
         log.debug("saving Waiter instance");
@@ -182,4 +180,16 @@ public class WaiterDAO extends BaseHibernateDAO  {
             throw re;
         }
     }
+    
+    public List findAllId(){
+		log.debug("find all ID from waiterInfo");
+		try{
+			String hql="select tableId from Waiter";
+			Query queryObject=getSession().createQuery(hql);
+			return queryObject.list();
+		}catch(RuntimeException re){
+			log.error("find id failed",re);
+			throw re;
+		}
+	}
 }

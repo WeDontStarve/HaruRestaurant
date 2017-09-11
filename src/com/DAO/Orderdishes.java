@@ -10,7 +10,7 @@ public class Orderdishes implements java.io.Serializable {
 
 	private OrderdishesId id;
 	private Integer num;
-
+	private String dishName;
 	// Constructors
 
 	/** default constructor */
@@ -39,6 +39,14 @@ public class Orderdishes implements java.io.Serializable {
 
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+
+	public String getDishName() {
+		return dishName;
+	}
+
+	public void setDishName(String dishName) {
+		this.dishName = dishName;
 	}
 
 }
