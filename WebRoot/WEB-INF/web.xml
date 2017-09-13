@@ -9,12 +9,20 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-    <servlet>
-        <servlet-name>TableJSONServlet</servlet-name>
-        <servlet-class>com.Servlet.TableJSONServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-    <servlet-name>TableJSONServlet</servlet-name>
-    <url-pattern>/TableJSONServlet</url-pattern>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>com.Servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/AdminServlet</url-pattern>
   </servlet-mapping>
+ 
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml </param-value>
+  </context-param>
+   <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 </web-app>

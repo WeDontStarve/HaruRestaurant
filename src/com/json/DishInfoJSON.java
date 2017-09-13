@@ -28,7 +28,7 @@ public class DishInfoJSON {
 	}
 	
 	//用id查询其他信息，并封装成json
-	private JSONObject createJSONById(java.lang.Integer id){
+	public JSONObject createJSONById(java.lang.Integer id){
 		JSONObject jsonById=new JSONObject();
 		//JSONObject idToJSON=new JSONObject();
 		JSONObject statusToJSON=new JSONObject();

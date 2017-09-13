@@ -171,7 +171,7 @@ public class CheifinfoDAO extends BaseHibernateDAO {
 	public List findAllId(){
 		log.debug("find all ID from cheifInfo");
 		try{
-			String hql="select tableId from Chiefinfo";
+			String hql="select cheifId from Cheifinfo";
 			Query queryObject=getSession().createQuery(hql);
 			return queryObject.list();
 		}catch(RuntimeException re){

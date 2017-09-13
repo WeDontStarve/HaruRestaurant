@@ -55,7 +55,7 @@ public class WaiterDAO extends BaseHibernateDAO  {
         log.debug("getting Waiter instance with id: " + id);
         try {
             Waiter instance = (Waiter) getSession()
-                    .get("Waiter", id);
+                    .get("com.DAO.Waiter", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -184,7 +184,7 @@ public class WaiterDAO extends BaseHibernateDAO  {
     public List findAllId(){
 		log.debug("find all ID from waiterInfo");
 		try{
-			String hql="select tableId from Waiter";
+			String hql="select waiterId from Waiter";
 			Query queryObject=getSession().createQuery(hql);
 			return queryObject.list();
 		}catch(RuntimeException re){

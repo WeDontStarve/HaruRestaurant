@@ -10,13 +10,13 @@
 
 	function getData(){
 		$.ajax({
-			url:"/HaruRestaurant/TableJSONServlet",
-			data:{method:"seat"},
+			url:"/HaruRestaurant/AdminServlet",
+			data:{method:"dish",action:"display"},
 			method:"post",
 			dataType:"json",
+			scriptCharset: "utf-8",
 			success:function(result){
-				//alert(result.city);
-				console.log(result)
+				console.log(result);
 			}
 		});
 	}

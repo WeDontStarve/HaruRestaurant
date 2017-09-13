@@ -27,7 +27,7 @@ public class TableInfoJSON {
 		return tableJson;
 	}
 	
-	private JSONObject createJSONById(java.lang.Integer id){
+	public JSONObject createJSONById(java.lang.Integer id){
 		JSONObject jsonById=new JSONObject();
 		//JSONObject idToJSON=new JSONObject();
 		JSONObject statusToJSON=new JSONObject();

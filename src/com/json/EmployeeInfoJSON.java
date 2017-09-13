@@ -36,7 +36,7 @@ public class EmployeeInfoJSON {
 		
 		for(int i=0;i<listSize;i++){
 			Integer id=(Integer) idList.get(i);
-			JSONObject index=this.createChiefJSONById(id);
+			JSONObject index=this.createWaiterJSONById(id);
 			waiterJson.put(id.toString(),index);
 		}
 		return waiterJson;
@@ -50,13 +50,13 @@ public class EmployeeInfoJSON {
 		
 		for(int i=0;i<listSize;i++){
 			Integer id=(Integer) idList.get(i);
-			JSONObject index=this.createChiefJSONById(id);
+			JSONObject index=this.createCheifJSONById(id);
 			cheifJson.put(id.toString(),index);
 		}
 		return cheifJson;
 	}
 	//单个waiter根据id查找，封装成json
-	private JSONObject createWaiterJSONById(java.lang.Integer id){
+	public JSONObject createWaiterJSONById(java.lang.Integer id){
 		JSONObject jsonById=new JSONObject();
 		JSONObject statusToJSON=new JSONObject();
 		Waiter waiter=waiterDAO.findById(id);
@@ -70,10 +70,10 @@ public class EmployeeInfoJSON {
 		return statusToJSON;
 	}
 	//单个cheif根据id查找，封装成json
-		private JSONObject createChiefJSONById(java.lang.Integer id){
+		public JSONObject createCheifJSONById(java.lang.Integer id){
 			JSONObject jsonById=new JSONObject();
 			JSONObject statusToJSON=new JSONObject();
-			Cheifinfo cheif=new Cheifinfo();
+			Cheifinfo cheif=cheifDAO.findById(id);
 			statusToJSON.put("name",cheif.getCheifAccount());
 			statusToJSON.put("img",cheif.getCheifFaceing());
 			statusToJSON.put("phone",cheif.getCheifPhone());

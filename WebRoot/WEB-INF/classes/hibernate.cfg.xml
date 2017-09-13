@@ -9,7 +9,7 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<property name="connection.url">jdbc:mysql://192.168.1.102:3306/restaurant?useUnicode=true&amp;characterEncoding=utf8</property>
+		<property name="connection.url">jdbc:mysql://223.3.98.67:3306/restaurant?useUnicode=true&amp;characterEncoding=utf8</property>
 		<property name="connection.username">ha</property>
 		<property name="connection.password">123456</property>
 		<property name="connection.driver_class">
