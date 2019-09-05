@@ -21,6 +21,61 @@
 <!-- //font-awesome icons -->
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 
+<script type="text/javascript">
+	var menu = "";
+	var tablemess = "";
+	var fir = -1;
+	$(function() {
+		getData3();
+	});
+	
+	var inform = "";
+	var total = 0;
+	var num = 0;
+	function getData3() {
+		$
+				.ajax({
+					url : "/res/AnnounceServlet",
+					type : 'post',
+					dataType : 'json',
+					success : function(data) {
+						num = 0;
+						total = 0;
+						console.log(data);
+						inform = data;
+						for ( var key in inform) {
+							total++;
+							if (inform[key].position == "manager")
+								num++;
+						}
+						var list_str = "";
+
+						if (num >= 1) {
+							for (var i = 0; i < 1; total--) {//因为菜单数不足，所以此段大于十还没有测试
+								if (inform[total - 1].position == "manager") {
+									list_str = list_str
+											+ "<a href=\"#\" class=\"list-group-item\">"
+											+ inform[total - 1].announce
+											+ "</a>";
+									i++;
+								}
+							}
+						} else {
+							list_str = list_str
+									+ "<a href=\"#\" class=\"list-group-item\">-</a>";
+							total--;
+						}
+						document.getElementById("top_menu").innerHTML = list_str;
+					},
+					error : function() {
+						alert("服务器没有返回数据，可能服务器忙，请重试");
+					},
+				});
+	}
+</script>
+	
+
+
 <style type="text/css">
 *{ margin:0; padding:0;}
 body { font:14px/1.8 arial;}
@@ -48,6 +103,63 @@ html, body, .wrap{ height:100%; }
 
 <script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"8123",secure:"8124"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
 <body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc2-5" data-genuitec-path="/web/WebRoot/StaffManagement.jsp">
+
+<script type="text/javascript">
+		$.ajax({
+			url : "/res/AdminServlet",
+			data : {
+				method : "employee",
+				action : "display"
+			},
+			type : 'post',
+			dataType : 'json',
+			success : function(data) {
+				var json = eval(data);
+				var data = "";
+				var table = "";
+				for (var i = 0, l = json.waiter.length; i < l; i++) {
+					table += '<tr>' + '<td>' + '服务员' + '</td>';
+					
+				        table += '<td>' + json.waiter[i].phone + '</td>';
+				        table += '<td>' + json.waiter[i].name + '</td>';
+                        table += '<td>' + json.waiter[i].id + '</td>';
+
+                      
+				        var a = json.waiter[i].id;
+				        //alert(a);
+				        table += '<td>' + '<a class="btn btn-default btn-xs" href="DetailInformation_staff.jsp?position=waiter&id='+a+'" role="button">编 辑</a>' 
+					        + '<a class="btn btn-default btn-xs" href="DelEmp.jsp?position=waiter&id='+a+'">删 除</a> ' + '</td>';
+				        
+					
+				    
+			    }
+			    for (var i = 0, l = json.chef.length; i < l; i++) {
+					table += '<tr>' + '<td>' + '厨师' + '</td>';
+					 table += '<td>' + json.chef[i].phone + '</td>';
+                        table += '<td>' + json.chef[i].name + '</td>';
+                        table += '<td>' + json.chef[i].id + '</td>';
+
+                      
+                        var a = json.chef[i].id;
+                        //alert(a);
+                        table += '<td>' + '<a class="btn btn-default btn-xs" href="DetailInformation_staff.jsp?position=chef&id='+a+'" role="button">编 辑</a>' 
+                            + '<a class="btn btn-default btn-xs" href="DelEmp.jsp?position=chef&id='+a+'">删 除</a> ' + '</td>';
+			
+			    }
+			    table += '<tr>' + '<td>' + '<a class="btn btn-default btn-lg" href="AddEmployee.jsp">添加员工</a>' + '</td>' + '</tr>';
+			   //alert(table);
+			    $('#StaffTable').append(table);
+					
+				},
+				
+			error : function() {
+				alert(arguments[1]);
+			},
+		});
+	
+</script>
+
+
 <section id="container" class="wrap" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc2-5" data-genuitec-path="/web/WebRoot/StaffManagement.jsp">
 <!--header start-->
 <header class="header fixed-top clearfix">
@@ -61,121 +173,19 @@ html, body, .wrap{ height:100%; }
         <div class="fa fa-bars"></div>
     </div>
 </div>
-<!--logo end-->
 <div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        
-        <!-- inbox dropdown start-->
-        <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
-            </a>
-            <ul class="dropdown-menu extended inbox">
-                <li>
-                    <p class="red">You have 4 Mails</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Just now</span>
-                                </span>
-                                <span class="message">
-                                    Hello, this is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/1.png"></span>
-                                <span class="subject">
-                                <span class="from">Jane Doe</span>
-                                <span class="time">2 min ago</span>
-                                </span>
-                                <span class="message">
-                                    Nice admin template
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Tasi sam</span>
-                                <span class="time">2 days ago</span>
-                                </span>
-                                <span class="message">
-                                    This is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/2.png"></span>
-                                <span class="subject">
-                                <span class="from">Mr. Perfect</span>
-                                <span class="time">2 hour ago</span>
-                                </span>
-                                <span class="message">
-                                    Hi there, its a test
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">See all messages</a>
-                </li>
-            </ul>
-        </li>
-        <!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
-            </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </li>
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
+   <input type="text" class="form-control" style="width:500px">
 </div>
+
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
+    	<li>
+            <p>id为</p>
+        </li>
+        <li>
+            <input type="text" class="form-control" style="width:50px" value="${userid }">
+        </li>
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -184,7 +194,7 @@ html, body, .wrap{ height:100%; }
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="login.html"><i class="fa fa-key"></i>退出登录</a></li>
+                <li><a href="login.jsp"><i class="fa fa-key"></i>退出登录</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -213,8 +223,9 @@ html, body, .wrap{ height:100%; }
                         <span>餐厅管理</span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a href="StaffManagement.jsp">员工管理</a></li>
+                        <li><a href="StaffManagement.jsp">员工管理</a></li>
                         <li><a href="DishesManagement.jsp">菜品管理</a></li>
+                        <li><a href="OrderManagement.jsp">订单管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -229,17 +240,6 @@ html, body, .wrap{ height:100%; }
                         <i class="fa fa-envelope"></i>
                         <span>信息反馈</span>
                     </a>
-                </li>
-                
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>销售统计</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="chartjs.html">Chart js</a></li>
-                        <li><a href="flot_chart.html">Flot Charts</a></li>
-                    </ul>
                 </li>
                 
             </ul>            
@@ -270,56 +270,14 @@ html, body, .wrap{ height:100%; }
         }}'>
         <thead>
           <tr>
-            <th data-breakpoints="xs">员工ID</th>
-            <th>职位</th>
-            <th>姓名</th>
-            <th>手机号</th>
-            <th>照片</th>
-           
-            <th>操作</th>
+            <th style="text-align:center;">职位</th>          
+            <th style="text-align:center;">电话</th>
+            <th style="text-align:center;">姓名</th>
+            <th style="text-align:center;">id</th>
+            <th style="text-align:center;">操作</th>
           </tr>
         </thead>
-        <tbody>
-          <tr data-expanded="true">
-            <td>1</td>
-            <td>厨师</td>
-            <td>小黄</td>
-            <td>12345678910</td>
-            
-            <td>
-                <img src="images/1.png" >
-            </td>
-            
-            <td>
-                <a class="btn btn-default btn-xs" href="＃" role="button">编 辑</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>服务员</td>
-            <td>小帅</td>
-            <td>9876728345</td>
-          
-            <td>
-                <img src="images/2.png" >
-            </td>
-            <td>
-                <a class="btn btn-default btn-xs" href="＃" role="button">编 辑</a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>厨师</td>
-            <td>安安</td>
-            <td>123432112334</td>
-           
-            <td>
-                <img src="images/3.png" >
-            </td>
-            <td>
-                <a class="btn btn-default btn-xs" href="＃" role="button">编 辑</a>
-            </td>
-          </tr>
+        <tbody id="StaffTable">
           
         </tbody>
       </table>

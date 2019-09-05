@@ -22,17 +22,17 @@ session.invalidate();//销毁session
 	
 	    <form class="form-inline" role="form"  name="form1" action="login.do" method="post"style="padding:10%;wight:100%;text-align:center;">
 	    <div class="row" style="padding-bottom:100px;">
-			<img href="MyJsp.jsp" class="img-responsive img-circle" src="./RES/1.jpg" style="float:right;margin-right:30px;height:250px;weight:250px;">
+			<a href="login.jsp"><img class="img-responsive img-circle" src="./RES/1.jpg" style="float:right;margin-right:30px;height:250px;weight:250px;"></a>
 			</div>
 			<div class="row">
-			<img class="img-responsive img-circle" src="./RES/2.jpg" style="float:right;margin-right:30px;height:250px;weight:250px;">
+			<a href="gukechushi.jsp"><img class="img-responsive img-circle" src="./RES/2.jpg" style="float:right;margin-right:30px;height:250px;weight:250px;"></a>
 			</div>
 		</form>
 
 		<div class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="navber-inner">	
 				<div class=“container”>
-				<a class="brand"style="position:fixed; bottom:0px;z-index:2" href="MyJsp.jsp">还没注册？我要注册</a>
+				<a class="brand"style="position:fixed; bottom:0px;z-index:2" href="reg.jsp">还没注册？我要注册</a>
 				
 				<a class="brand"style="width:100%; position:fixed;text-align:center; bottom:20px;" href="#">小春日和餐厅到店点餐系统</a>
 				<a class="brand"style="width:100%; position:fixed;text-align:center;bottom:0px;" href="#">联系电话：025-1234 5678</a>

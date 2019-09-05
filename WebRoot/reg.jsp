@@ -67,23 +67,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body background = "./RES/4.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment: fixed;">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navber-inner">		
-			<div class=“container”>
+			<div class=“container”>${msg}
 			<img   class="img-responsive "src="./RES/logo.jpg"style="width:50px;">
 			</div>
 		</div>
 		</div>
 		
 		<div class="container">
-			<form class="form-signin" action="test_zhuce.jsp" method="post">
-				<h2 class="form-signin-heading">Please sign up</h2>
-				<input type="text" class="input-block-level" placeholder = "Username">
-				<input type="password" class="input-block-level" placeholder = "Password">
-				<input type="password" class="input-block-level" placeholder = "Confirm Password ">
-				<input type="text" class="input-block-level" placeholder = "ID card Number">
-				<input type="text" class="input-block-level" placeholder = "Phone Number">
-				<input type="text" class="input-block-level" placeholder = "Restaurate Name">
-				<input type="text" class="input-block-level" placeholder = "Restaurate Address">
-				<input type="text" class="input-block-level" placeholder = "yanzhengma">
+			<form class="form-signin" action="register.action" method="post">
+				<h2 class="form-signin-heading">请注册</h2>
+				<input type="text" name="regusername" class="input-block-level" placeholder = "用户名">
+				<input type="password" name="regpassword" class="input-block-level" placeholder = "密码">
+				<input type="password" name="confirm" class="input-block-level" placeholder = "重复输入密码">
+				<input type="text" name="ID" class="input-block-level" placeholder = "身份证号码">
+				<input type="text" name="phone" class="input-block-level" placeholder = "电话号码">
+				<input type="text" name="resName" class="input-block-level" placeholder = "餐厅名称">
+				<input type="text" name="resAdd" class="input-block-level" placeholder = "餐厅地址">
+				<!-- <input type="text" name="yanzheng" class="input-block-level" placeholder = "yanzhengma">-->
 				<button class="btn btn-large btn-primary btn-block"  style="float:top;margin-top:10px;"type="submit">Sign up</button>
 			</form>
 		</div>
@@ -97,5 +97,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		</div>
+		
+		<%String message=(String)session.getAttribute("msg");%>
+		<% if("".equals(message)){
+			
+		}
+		else if(message==null)
+		{
+			
+		}
+		else{%>
+    <script type="text/javascript">
+        alert("<%=message%>");
+    </script>
+    <%session.setAttribute("msg",null);}%>
+		
   </body>
 </html>

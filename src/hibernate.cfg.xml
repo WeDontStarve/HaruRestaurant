@@ -9,22 +9,25 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<property name="connection.url">jdbc:mysql://223.3.98.67:3306/restaurant?useUnicode=true&amp;characterEncoding=utf8</property>
-		<property name="connection.username">ha</property>
-		<property name="connection.password">123456</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/restaurant?useUnicode=true&amp;characterEncoding=utf8</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">961022</property>
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="show_sql">true</property>
-		<mapping resource="com/DAO/Admininfo.hbm.xml" />
-		<mapping resource="com/DAO/Cheifinfo.hbm.xml" />
-		<mapping resource="com/DAO/Dishinfo.hbm.xml" />
-		<mapping resource="com/DAO/Orderdishes.hbm.xml" />
-		<mapping resource="com/DAO/Tableinfo.hbm.xml" />
-		<mapping resource="com/DAO/Vipinfo.hbm.xml" />
-		<mapping resource="com/DAO/Waiter.hbm.xml" />
-		<mapping resource="com/DAO/Orderinfo.hbm.xml" />
+		
+		<mapping resource="com/hibernate/dao/Admininfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Cheifinfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Waiterinfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Tableinfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Dishinfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Commentinfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Orderdishes.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Orderinfo.hbm.xml" />
+		<mapping resource="com/hibernate/dao/Information.hbm.xml" />
 
 	</session-factory>
+	
 
 </hibernate-configuration>

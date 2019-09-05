@@ -1,7 +1,7 @@
 #MyEclipse Hibernate Properties
-#Fri Sep 08 14:51:55 CST 2017
-genBasicCompId=true
-sessionFactoryName=com.DAO.HibernateSessionFactory
+#Sat Sep 16 11:02:50 CST 2017
+genBasicCompId=false
+sessionFactoryName=com.hibernate.session.HibernateSessionFactory
 profile=
 daoSFId=
 jndiPath=
@@ -10,12 +10,12 @@ reStrategyClass=
 detectO2O=false
 springDaoFile=
 useJavaTypes=true
-keyGenerator=native
+keyGenerator=
 genVersionTag=true
 sessionFactoryId=
 basePersistenceClass=
 genAnnotations=false
-reSettingsFile=/HaruRestaurant/hibernate.reveng.xml
-configFile=/HaruRestaurant/src/hibernate.cfg.xml
+reSettingsFile=
+configFile=/res/src/hibernate.cfg.xml
 createConfigFile=true
-baseDaoClass=com.DAO.BaseHibernateDAO
+baseDaoClass=com.hibernate.dao.BaseHibernateDAO

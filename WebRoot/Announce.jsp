@@ -20,6 +20,61 @@
 <!-- //font-awesome icons -->
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 
+<script type="text/javascript">
+	var menu = "";
+	var tablemess = "";
+	var fir = -1;
+	$(function() {
+		getData3();
+	});
+	
+	var inform = "";
+	var total = 0;
+	var num = 0;
+	function getData3() {
+		$
+				.ajax({
+					url : "/res/AnnounceServlet",
+					type : 'post',
+					dataType : 'json',
+					success : function(data) {
+						num = 0;
+						total = 0;
+						console.log(data);
+						inform = data;
+						for ( var key in inform) {
+							total++;
+							if (inform[key].position == "manager")
+								num++;
+						}
+						var list_str = "";
+
+						if (num >= 1) {
+							for (var i = 0; i < 1; total--) {//因为菜单数不足，所以此段大于十还没有测试
+								if (inform[total - 1].position == "manager") {
+									list_str = list_str
+											+ "<a href=\"#\" class=\"list-group-item\">"
+											+ inform[total - 1].announce
+											+ "</a>";
+									i++;
+								}
+							}
+						} else {
+							list_str = list_str
+									+ "<a href=\"#\" class=\"list-group-item\">-</a>";
+							total--;
+						}
+						document.getElementById("top_menu").innerHTML = list_str;
+					},
+					error : function() {
+						alert("服务器没有返回数据，可能服务器忙，请重试");
+					},
+				});
+	}
+</script>
+
+
+
 <style type="text/css">
 *{ margin:0; padding:0;}
 body { font:14px/1.8 arial;}
@@ -60,121 +115,21 @@ html, body, .wrap{ height:100%; }
         <div class="fa fa-bars"></div>
     </div>
 </div>
-<!--logo end-->
 <div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        
-        <!-- inbox dropdown start-->
-        <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
-            </a>
-            <ul class="dropdown-menu extended inbox">
-                <li>
-                    <p class="red">You have 4 Mails</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Just now</span>
-                                </span>
-                                <span class="message">
-                                    Hello, this is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/1.png"></span>
-                                <span class="subject">
-                                <span class="from">Jane Doe</span>
-                                <span class="time">2 min ago</span>
-                                </span>
-                                <span class="message">
-                                    Nice admin template
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Tasi sam</span>
-                                <span class="time">2 days ago</span>
-                                </span>
-                                <span class="message">
-                                    This is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/2.png"></span>
-                                <span class="subject">
-                                <span class="from">Mr. Perfect</span>
-                                <span class="time">2 hour ago</span>
-                                </span>
-                                <span class="message">
-                                    Hi there, its a test
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">See all messages</a>
-                </li>
-            </ul>
-        </li>
-        <!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
-            </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </li>
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
+   <input type="text" class="form-control" style="width:500px">
 </div>
+
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
+    	<li>
+            <p>id为</p>
+        </li>
+        <li>
+            <input type="text"  class="form-control" style="width:50px" value="${userid }">
+        </li>
+        
+        
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -183,7 +138,7 @@ html, body, .wrap{ height:100%; }
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="login.html"><i class="fa fa-key"></i>退出登录</a></li>
+                <li><a href="login.jsp"><i class="fa fa-key"></i>退出登录</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -214,6 +169,7 @@ html, body, .wrap{ height:100%; }
                     <ul class="sub">
                         <li><a href="StaffManagement.jsp">员工管理</a></li>
                         <li><a href="DishesManagement.jsp">菜品管理</a></li>
+                        <li><a href="OrderManagement.jsp">订单管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -228,17 +184,6 @@ html, body, .wrap{ height:100%; }
                         <i class="fa fa-envelope"></i>
                         <span>信息反馈</span>
                     </a>
-                </li>
-                
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>销售统计</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="chartjs.html">Chart js</a></li>
-                        <li><a href="flot_chart.html">Flot Charts</a></li>
-                    </ul>
                 </li>
                 
             </ul>            
@@ -261,17 +206,13 @@ html, body, .wrap{ height:100%; }
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form role="form">
+                                <form role="form" action="toSerAndChef.action" method="post">
                                 <div class="form-group">
                                     <label>公告内容</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    <p>服务员</p><input type="text" class="form-control" name="serance">
+                                    <br /><p>厨师</p><input type="text" class="form-control" name="chefance">
                                 </div>
                                 
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 确认发布
-                                    </label>
-                                </div>
                                 <button type="submit" class="btn btn-info">发布</button>
                             </form>
                             </div>
@@ -287,18 +228,13 @@ html, body, .wrap{ height:100%; }
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form role="form">
+                                <form role="form" action="toCustom.action" method="post">
                                 <div class="form-group">
                                     <label>公告内容</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="announce" placeholder="Enter email">
                                 </div>
                                 
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 确认发布
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-info">发布</button>
+                                 <button type="submit" class="btn btn-info">发布</button>
                             </form>
                             </div>
 
@@ -327,5 +263,24 @@ html, body, .wrap{ height:100%; }
 			</div>
 		  </div>
   <!-- / footer -->
+  
+  <%String message=(String)session.getAttribute("ancemsg");
+		if("".equals(message)){
+			
+		}
+		else if(message==null)
+		{
+			
+		}
+		else{%>
+    <script type="text/javascript">
+        alert("<%=message%>");
+    </script>
+    <%session.setAttribute("ancemsg",null);}%>
 </body>
+
+
+
+
+
 </html>

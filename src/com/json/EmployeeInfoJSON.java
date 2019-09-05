@@ -1,7 +1,11 @@
 package com.json;
+import java.util.Iterator;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.hibernate.dao.*;
 //{
 //	waiter:{
 //		id1:{name:"",img:"",phone:"",salary:"",bonus:""},
@@ -15,56 +19,89 @@ import org.json.simple.JSONObject;
 //			}
 //}
 
-import com.DAO.*;
 public class EmployeeInfoJSON {
-	private WaiterDAO waiterDAO=new WaiterDAO();
+	private WaiterinfoDAO waiterDAO=new WaiterinfoDAO();
 	private CheifinfoDAO cheifDAO=new CheifinfoDAO();
 	
 	public JSONObject EmployeeJSON(){
 		JSONObject employeeJson=new JSONObject();
 		
 		employeeJson.put("waiter", this.WaiterInfoJSON());
-		employeeJson.put("cheif", this.CheifInfoJSON());
+		employeeJson.put("chef", this.CheifInfoJSON());
 		
 		return employeeJson;
 	}
-	public JSONObject WaiterInfoJSON(){
-		JSONObject waiterJson=new JSONObject();
+	
+	public JSONArray WaiterInfoJSON(){
+		JSONArray waiterArray=new JSONArray();
 		
-		List idList=waiterDAO.findAllId();
-		int listSize=idList.size();
-		
-		for(int i=0;i<listSize;i++){
-			Integer id=(Integer) idList.get(i);
-			JSONObject index=this.createWaiterJSONById(id);
-			waiterJson.put(id.toString(),index);
+		List waiterList=waiterDAO.findAll();
+		Iterator<Waiterinfo> itr=waiterList.iterator();
+		while(itr.hasNext()){
+			JSONObject waiterJson=new JSONObject();
+			Waiterinfo waiter=itr.next();
+			waiterJson.put("id", waiter.getWaiterId());
+			waiterJson.put("name",waiter.getWaiterAccount());
+			waiterJson.put("img",waiter.getWaiterFaceing());
+			waiterJson.put("phone",waiter.getWaiterPhone());
+			waiterArray.add(waiterJson);
 		}
-		return waiterJson;
+		return waiterArray;
 	}
 	
-	public JSONObject CheifInfoJSON(){
-		JSONObject cheifJson=new JSONObject();
+	public JSONArray CheifInfoJSON(){
+		JSONArray cheifArray=new JSONArray();
 		
-		List idList=cheifDAO.findAllId();
-		int listSize=idList.size();
-		
-		for(int i=0;i<listSize;i++){
-			Integer id=(Integer) idList.get(i);
-			JSONObject index=this.createCheifJSONById(id);
-			cheifJson.put(id.toString(),index);
+		List cheifList=cheifDAO.findAll();
+		Iterator<Cheifinfo> itr=cheifList.iterator();
+		while(itr.hasNext()){
+			JSONObject cheifJson=new JSONObject();
+			Cheifinfo cheif=itr.next();
+			cheifJson.put("id",cheif.getCheifId());
+			cheifJson.put("name",cheif.getCheifAccount());
+			cheifJson.put("img",cheif.getCheifFaceing());
+			cheifJson.put("phone",cheif.getCheifPhone());
+			cheifArray.add(cheifJson);
 		}
-		return cheifJson;
+		return cheifArray;
 	}
+//	public JSONObject WaiterInfoJSON(){
+//		JSONObject waiterJson=new JSONObject();
+//		
+//		List idList=waiterDAO.findAllId();
+//		int listSize=idList.size();
+//		
+//		for(int i=0;i<listSize;i++){
+//			Integer id=(Integer) idList.get(i);
+//			JSONObject index=this.createWaiterJSONById(id);
+//			waiterJson.put(id.toString(),index);
+//		}
+//		return waiterJson;
+//	}
+	
+//	public JSONObject CheifInfoJSON(){
+//		JSONObject cheifJson=new JSONObject();
+//		
+//		List idList=cheifDAO.findAllId();
+//		int listSize=idList.size();
+//		
+//		for(int i=0;i<listSize;i++){
+//			Integer id=(Integer) idList.get(i);
+//			JSONObject index=this.createCheifJSONById(id);
+//			cheifJson.put(id.toString(),index);
+//		}
+//		return cheifJson;
+//	}
 	//单个waiter根据id查找，封装成json
 	public JSONObject createWaiterJSONById(java.lang.Integer id){
 		JSONObject jsonById=new JSONObject();
 		JSONObject statusToJSON=new JSONObject();
-		Waiter waiter=waiterDAO.findById(id);
+		Waiterinfo waiter=waiterDAO.findById(id);
+		statusToJSON.put("id", waiter.getWaiterId());
 		statusToJSON.put("name",waiter.getWaiterAccount());
 		statusToJSON.put("img",waiter.getWaiterFaceing());
 		statusToJSON.put("phone",waiter.getWaiterPhone());
-		statusToJSON.put("salary", waiter.getWaiterSalary());
-		statusToJSON.put("bonus",waiter.getWaiterBonus());
+		
 		//jsonById.put(id.toString(),statusToJSON);
 		//return jsonById;
 		return statusToJSON;
@@ -74,11 +111,11 @@ public class EmployeeInfoJSON {
 			JSONObject jsonById=new JSONObject();
 			JSONObject statusToJSON=new JSONObject();
 			Cheifinfo cheif=cheifDAO.findById(id);
+			statusToJSON.put("id", cheif.getCheifId());
 			statusToJSON.put("name",cheif.getCheifAccount());
 			statusToJSON.put("img",cheif.getCheifFaceing());
 			statusToJSON.put("phone",cheif.getCheifPhone());
-			statusToJSON.put("salary", cheif.getCheifSalary());
-			statusToJSON.put("bonus",cheif.getCheifBonus());
+			
 			//jsonById.put(id.toString(),statusToJSON);
 			//return jsonById;
 			return statusToJSON;

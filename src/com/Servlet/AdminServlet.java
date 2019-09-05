@@ -1,4 +1,4 @@
-package com.Servlet;
+package com.servlet;
 
 import java.io.IOException;
 
@@ -8,8 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.hibernate.dao.Admininfo;
+import com.hibernate.dao.AdmininfoDAO;
+import com.hibernate.dao.Cheifinfo;
+import com.hibernate.dao.CheifinfoDAO;
+import com.hibernate.dao.Dishinfo;
+import com.hibernate.dao.DishinfoDAO;
+import com.hibernate.dao.Tableinfo;
+import com.hibernate.dao.TableinfoDAO;
+import com.hibernate.dao.Waiterinfo;
+import com.hibernate.dao.WaiterinfoDAO;
 import com.json.*;
 public class AdminServlet extends HttpServlet {
 	
@@ -33,7 +44,7 @@ public class AdminServlet extends HttpServlet {
 			if(method.equals("dish")){
 				DishInfoJSON dishinfo=new DishInfoJSON();
 				if(action.equals("display")){
-					JSONObject dishJSON=dishinfo.infoToJSON();
+					JSONArray dishJSON=dishinfo.dishJSON();
 					response.getWriter().write(dishJSON.toString());
 					//return;
 				}
@@ -42,6 +53,12 @@ public class AdminServlet extends HttpServlet {
 					JSONObject dish_change=dishinfo.createJSONById(Integer.valueOf(id));
 					response.getWriter().write(dish_change.toString());
 					//return;
+				}
+				else if(action.equals("delete")){
+					String id=request.getParameter("id");
+					DishinfoDAO dishDAO=new DishinfoDAO();
+					Dishinfo dish=dishDAO.findById(Integer.valueOf(id));
+					dishDAO.delete(dish);
 				}
 			}
 			//员工管理
@@ -60,10 +77,24 @@ public class AdminServlet extends HttpServlet {
 						response.getWriter().write(waiter_change.toString());
 						//return;
 					}
-					else if(position.equals("cheif")){
+					else if(position.equals("chef")){
 						JSONObject cheif_change=employeeinfo.createCheifJSONById(Integer.valueOf(id));
 						response.getWriter().write(cheif_change.toString());
 						//return;
+					}
+				}
+				else if(action.equals("delete")){
+					String position=request.getParameter("position");
+					String id=request.getParameter("id");
+					if(position.equals("waiter")){
+						WaiterinfoDAO waiterDAO=new WaiterinfoDAO();
+						Waiterinfo waiter=waiterDAO.findById(Integer.valueOf(id));
+						waiterDAO.delete(waiter);
+					}
+					else if(position.equals("chef")){
+						CheifinfoDAO cheifDAO=new CheifinfoDAO();
+						Cheifinfo cheif=cheifDAO.findById(Integer.valueOf(id));
+						cheifDAO.delete(cheif);
 					}
 				}
 			}
@@ -72,7 +103,7 @@ public class AdminServlet extends HttpServlet {
 				TableInfoJSON tableinfo=new TableInfoJSON();
 				if(action.equals("display")){
 					//返回所有seat值
-					JSONObject tableJSON=tableinfo.infoToJSON();
+					JSONArray tableJSON=tableinfo.tableJSON();
 					response.getWriter().write(tableJSON.toString());
 					//return;
 				}
@@ -81,6 +112,12 @@ public class AdminServlet extends HttpServlet {
 					JSONObject seat_change=tableinfo.createJSONById(Integer.valueOf(id));
 					response.getWriter().write(seat_change.toString());
 					//return;
+				}
+				else if(action.equals("delete")){
+					String id=request.getParameter("id");
+					TableinfoDAO tableDAO=new TableinfoDAO();
+					Tableinfo table=tableDAO.findById(Integer.valueOf(id));
+					tableDAO.delete(table);
 				}
 			}
 			

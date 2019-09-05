@@ -8,8 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-   
+
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -77,22 +76,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		</div>
 		<div class="container" style="padding:10%">
-			<form class="form-signin" action="login.spring" method="post">
-				<h2 class="form-signin-heading">Please sign in</h2>
-				<input type="text" class="input-block-level" placeholder = "Email address">
-				<input type="password" class="input-block-level" placeholder = "Password">
-				<div class="btn-group btn-block">
-					<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="dropdown">身份选择
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a value="1" href="#">顾客登陆</a></li>
-						<li class="divider"></li>
-						<li><a href="#">管理员登陆</a></li>
-						<li><a href="#">后厨登陆</a></li>
-						<li><a href="#">服务员登陆</a></li>
-					</ul>
-						<button class="btn btn-large btn-primary btn-block"  style="float:top;margin-top:10px;"type="submit">Sign in</button>
+			<form class="form-signin" action="login.action" method="post">
+				<h2 class="form-signin-heading">请登录</h2>
+				<input type="text" name="username" class="input-block-level" placeholder = "用户ID">
+				<input type="password" name="password" class="input-block-level" placeholder = "用户密码">
+				<select name="identity">
+				<option value="-1">您的身份是</option>
+				<option value="1">顾客</option>
+				<option value="2">管理员</option>
+				<option value="3">服务员</option>
+				<option value="4">后厨</option>
+				</select>
+				<button class="btn btn-large btn-primary btn-block"  style="float:top;margin-top:10px;"type="submit">Sign in</button>
 				</div>
 				
 				
@@ -101,10 +96,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="navber-inner">		
 			<div class=“container”>
+							<a class="brand"style="position:fixed; bottom:0px;z-index:2" href="reg.jsp">还没注册？我要注册</a>
 				<a class="brand"style="width:100%; position:fixed;text-align:center; bottom:20px;" href="#">小春日和餐厅到店点餐系统</a>
 				<a class="brand"style="width:100%; position:fixed;text-align:center;bottom:0px;" href="#">联系电话：025-1234 5678</a>
 			</div>
 		</div>
 		</div>
+		
+		<%String message=(String)session.getAttribute("msg");
+		if("".equals(message)){
+			
+		}
+		else if(message==null)
+		{
+			
+		}
+		else{%>
+    <script type="text/javascript">
+        alert("<%=message%>");
+    </script>
+    <%session.setAttribute("msg",null);}%>
+		
   </body>
 </html>
